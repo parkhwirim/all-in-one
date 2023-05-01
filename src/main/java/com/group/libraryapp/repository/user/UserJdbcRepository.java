@@ -8,11 +8,11 @@ import org.springframework.stereotype.Repository;
 import com.group.libraryapp.dto.user.response.UserResponse;
 
 @Repository
-public class UserRepository {
+public class UserJdbcRepository {
 
 	private final JdbcTemplate jdbcTemplate;
 
-	public UserRepository(JdbcTemplate jdbcTemplate) {
+	public UserJdbcRepository(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 

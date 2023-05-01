@@ -2,7 +2,6 @@ package com.group.libraryapp.controller.user;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,18 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.group.libraryapp.dto.user.request.UserCreateRequest;
 import com.group.libraryapp.dto.user.request.UserUpdateRequest;
 import com.group.libraryapp.dto.user.response.UserResponse;
-import com.group.libraryapp.service.fruit.FruitService;
-import com.group.libraryapp.service.user.UserService;
+import com.group.libraryapp.service.user.UserServiceV1;
+import com.group.libraryapp.service.user.UserServiceV2;
 
 @RestController
 public class UserController {
 
-	private final UserService userService;
-	private final FruitService fruitService;
+	private final UserServiceV2 userService;
 
-	public UserController(UserService userService, @Qualifier("main") FruitService fruitService) {
+	public UserController(UserServiceV2 userService) {
 		this.userService = userService;
-		this.fruitService = fruitService;
 	}
 
 	@PostMapping("/user")
