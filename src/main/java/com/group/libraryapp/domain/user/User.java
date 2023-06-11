@@ -1,10 +1,9 @@
 package com.group.libraryapp.domain.user;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.group.libraryapp.domain.user.loanhistory.UserLoanHistory;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
@@ -17,6 +16,9 @@ public class User {
 	private String name;
 
 	private Integer age;
+
+	@OneToMany(mappedBy = "user")
+	private List<UserLoanHistory> userLoanHistories;
 
 	public User(String name, Integer age) {
 		if (name == null || name.isBlank()) {
