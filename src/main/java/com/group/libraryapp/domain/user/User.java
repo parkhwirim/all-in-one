@@ -45,4 +45,16 @@ public class User {
 	public void setName(String name) {
 		this .name = name;
 	}
+
+	public void loanBook(String bookName) {
+		this.userLoanHistories.add(new UserLoanHistory(this, bookName, false));
+	}
+
+	public void returnBook(String booName) {
+		UserLoanHistory targetHistory = this.userLoanHistories.stream()
+				.filter(userLoanHistory -> userLoanHistory.getBookName().equals(booName))
+				.findFirst()
+				.orElseThrow(() -> new IllegalArgumentException("해당 도서는 존재하지 않습니다."));
+		targetHistory.doReturn();
+	}
 }

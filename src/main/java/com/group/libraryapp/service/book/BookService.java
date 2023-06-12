@@ -43,18 +43,13 @@ public class BookService {
 
 		User user = userRepository.findByName(request.getUserName())
 				.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
-
-		userLoanHistoryRepository.save(new UserLoanHistory(user, book.getName(), false));
+		user.loanBook(book.getName());
 	}
 
 	@Transactional
 	public void returnBook(BookReturnRequest request) {
 		User user = userRepository.findByName(request.getUserName())
 				.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
-
-		UserLoanHistory userLoanHistory = userLoanHistoryRepository.findByUserIdAndBookName(user.getId(), request.getBookName())
-				.orElseThrow(() -> new IllegalArgumentException("해당 회원의 대출 이력이 존재하지 않습니다."));
-
-		userLoanHistory.doReturn();
+		user.returnBook(request.getBookName());
 	}
 }
